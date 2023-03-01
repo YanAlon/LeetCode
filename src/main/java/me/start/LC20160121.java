@@ -15,5 +15,22 @@ package me.start;
  * 同时，你不能在买入前卖出股票。
  */
 public class LC20160121 {
-    
+    // 动态规划做题步骤
+    // 1.明确 dp(i) 应该表示什么（二维情况：dp(i)(j)）；
+    // 2.dp(i) 和 dp(i?1) 的关系得出状态转移方程；
+    //  例：dp[i]=max(dp[i?1], prices[i]?minprice)
+    // 3.确定初始条件，如 dp(0)。
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) return 0;
+        int [] dp = new int[prices.length];
+        dp[0] = 0;
+        int minprice = prices[0];
+        for (int i = 1; i < prices.length - 1; i++) {
+            // 每次只与之前出现的最小数比较
+            dp[i] = Math.max(dp[i - 1], prices[i] - minprice);
+            // 当出现新的最小数时，替换掉，因为后续比较不可能再与前面出现的数产生更大分差
+            minprice = Math.min(prices[i], minprice);
+        }
+        return dp[prices.length - 1];
+    }
 }
