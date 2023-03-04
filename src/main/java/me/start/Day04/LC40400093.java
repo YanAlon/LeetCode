@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class LC40400093 {
     //画图理解
-    public static List<String> restoreIpAddresses(String s) {
+    public List<String> restoreIpAddresses(String s) {
         //定义表示一个字符长度的变量
         int len = s.length();
         //定义一个返回结果的集合
@@ -38,7 +38,7 @@ public class LC40400093 {
         return res;
     }
 
-    public static void dfs(String s, int len, int begin, int residue, Deque<String> path, List<String> res) {
+    public void dfs(String s, int len, int begin, int residue, Deque<String> path, List<String> res) {
         //如果字符串已经遍历到最后了，并且已经切分为4段了，
         //就把当前路径上的元素加入到返回的结果集中
         if (begin == len) { // 上一回溯中begin加过1，所以=len了
@@ -69,13 +69,12 @@ public class LC40400093 {
                 // 递归下一层
                 dfs(s, len, i + 1, residue - 1, path, res);
                 // 回溯，add了一个，结束后将其remove
-                System.out.println(i + " : i : " + path);
                 path.removeLast();
             }
         }
     }
     // 判断是否符合条件
-    private static boolean judgeIpSegment(String s, int left, int right) {
+    private boolean judgeIpSegment(String s, int left, int right) {
         //定义一个表示整个字符的长度
         int len = right - left + 1;
         //如果截取的大于等于2的字符的开头为0，就直接false
@@ -95,8 +94,8 @@ public class LC40400093 {
 
     public static void main(String[] args) {
         String s = "1111";
-        List<String> res = new ArrayList<>();
-        res = restoreIpAddresses(s);
+        LC40400093 solution = new LC40400093();
+        List<String> res = solution.restoreIpAddresses(s);
         System.out.println(res);
     }
 }
