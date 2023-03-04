@@ -14,7 +14,7 @@ import java.util.List;
  * 输入：s = "aab"
  * 输出：[["a","a","b"],["aa","b"]]
  */
-public class LC60510131 {
+public class LC60510131_0 {
     // 1、回溯优化+动态规划的（没看懂
     public List<List<String>> partition(String s) {
         int len = s.length();
@@ -91,6 +91,7 @@ public class LC60510131 {
     private void helper(List<List<String>> res, List<String> list, String s,
                         int index, boolean[][] dp){
         if(index == s.length()){
+            System.out.println("add");
             res.add(new ArrayList<>(list));
             return;
         }
@@ -99,6 +100,7 @@ public class LC60510131 {
             System.out.println("index : " + index);
             //利用预处理结果就不用再去判断该字符串是否是回文串
             if(!dp[index][i]){
+                System.out.println("false");
                 continue;
             }
             list.add(s.substring(index, i + 1));
@@ -110,7 +112,7 @@ public class LC60510131 {
 
     public static void main(String[] args) {
         String s = "aab";
-        LC60510131 solution = new LC60510131();
+        LC60510131_0 solution = new LC60510131_0();
         List<List<String>> res = solution.partition02(s);
         System.out.println(res);
     }
